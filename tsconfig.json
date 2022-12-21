@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/Login-page/Main.tsx"],
+  "include": ["src", "src/Login-page/LoginMain.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

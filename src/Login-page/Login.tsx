@@ -1,13 +1,18 @@
 import React from "react";
 import { auth, googleProvider, facebookProvider } from "../config/firebase";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 export default function Login() {
+const navigate = useNavigate();
+
   const signInGoogle = async () => {
     await signInWithPopup(auth, googleProvider);
+    navigate('\timelime')
     };
     const signInFacebook = async () => {
       await signInWithPopup(auth, facebookProvider);
+    navigate("\timelime");
+
   };
 
   return (

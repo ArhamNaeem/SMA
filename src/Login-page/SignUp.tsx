@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { auth } from "../config/firebase";
-import { createUserWithEmailAndPassword  } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser, getAuth  } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 export default function SignUp() {
-  
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState < string>("");
   const [style, setStyle] = useState("w-screen h-12");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+ 
   const signUp = async () => {
-    // try {
-      await createUserWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
+    console.log('setting')
       setStyle(
         "w-screen h-12 bg-blue-300 text-xl text-center text-white p-2 font-md"
       );
-      setMsg("Account created")
-    // }
-    // catch (err) {
-    //   console.log('an error', err)
-    // }
+      setMsg("Account created");
+    setTimeout(() => {
+          setStyle("w-screen h-12");
+          setMsg("");
+           navigate("/");
 
+    }, 1000);
   };
   return (
     <>
