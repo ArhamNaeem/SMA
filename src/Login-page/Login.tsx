@@ -96,7 +96,7 @@ export default function Login() {
           </p>
         </div>
         <div className="flex flex-col border-l w-2/3 h-4/5">
-          <p className="font-bold text-4xl text-center">Posts</p>
+          <p className="font-bold text-4xl text-center">Sign in</p>
 
           <div className="pl-4 flex flex-col items-center p-2 m-2">
             <input
@@ -127,13 +127,13 @@ export default function Login() {
             </button>
             <p
               onClick={signInFacebook}
-              className="border-t cursor-pointer p-2 text-lg mt-2 w-full text-center hover:text-blue-500"
+              className="border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
             >
               Sign in with Facebook
             </p>
             <p
               onClick={signInGoogle}
-              className=" border-t cursor-pointer p-2 text-lg mt-4 w-full text-center hover:text-blue-500"
+              className=" border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
             >
               Sign in with Google
             </p>

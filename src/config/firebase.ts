@@ -3,6 +3,7 @@ import { initializeApp} from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth'; 
 import { getFirestore } from 'firebase/firestore';
+import { getStorage} from 'firebase/storage'
 const firebaseConfig = {
   apiKey: "AIzaSyDaf0IDcxsZE1kQc-rVSo1RfC1CMQBQhN4",
   authDomain: "social-media-app-75f48.firebaseapp.com",
@@ -21,3 +22,4 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const facebookProvider = new FacebookAuthProvider();
 export const db = getFirestore(app)
+export const storage = getStorage(app)
