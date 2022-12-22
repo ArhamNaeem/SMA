@@ -8,20 +8,34 @@ export default function SignUp() {
   const [style, setStyle] = useState("w-screen h-12");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
- 
+
   const signUp = async () => {
-    await createUserWithEmailAndPassword(auth, email, password);
-    console.log('setting')
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    
       setStyle(
         "w-screen h-12 bg-blue-300 text-xl text-center text-white p-2 font-md"
       );
       setMsg("Account created");
-    setTimeout(() => {
-          setStyle("w-screen h-12");
-          setMsg("");
-           navigate("/");
+      setTimeout(() => {
+        setStyle("w-screen h-12");
+        setMsg("");
+        navigate("/");
 
-    }, 1000);
+      }, 1000);
+    } catch (e) {
+     setStyle(
+       "w-screen h-12 bg-red-200 text-xl text-center text-white p-2 font-md"
+     );
+     setMsg("Acco");
+     setTimeout(() => {
+       setStyle("w-screen h-12");
+       setMsg("");
+       navigate("/");
+     }, 1000);
+    }
+      
+    
   };
   return (
     <>
