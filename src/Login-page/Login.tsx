@@ -64,7 +64,7 @@ export default function Login() {
         setStyle(
           "w-screen h-12 bg-blue-300 text-xl text-center text-white p-2 font-md"
         );
-        setMsg("Signed in");
+        setMsg("Signing in");
         setTimeout(() => {
           setStyle("w-screen h-12");
           setMsg("");
