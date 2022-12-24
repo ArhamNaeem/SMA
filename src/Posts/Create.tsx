@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRef } from 'react';
 
-export default function PostMain() {
+export default function Create() {
         return (
           <>
             <div className="container flex justify-center items-center h-screen text-center text-blue-300 text-4xl">

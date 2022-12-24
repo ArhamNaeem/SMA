@@ -7,10 +7,12 @@ export default function Navbar() {
         <ul className="flex justify-between  p-2 items-center">
           <li>
             <div className="flex text-lg relative bottom-1">
-              <Link to={"/createPost"}>
+              <Link to={"/create-post"}>
                 <button className="mr-3 ml-2 lg:mr-5 ">Create post</button>
               </Link>
-              <button> Delete post</button>
+              <Link to={"/delete-post"}>
+                <button> Delete post</button>
+              </Link>
             </div>
           </li>
           <li className="text-4xl">

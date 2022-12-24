@@ -91,7 +91,7 @@ export default function Login() {
         <div className="text-center p-10 h-3/4 w-1/2 mr-4 font-bold text-5xl">
           Posts
           <p className=" border-b border-blue-300 pb-5 mt-10 font-light text-lg">
-            Easy sign up, just with email and password. No need to go through
+            Easy sign ups, just with email and password. No need to go through
             tedious sign-up forms
           </p>
         </div>
@@ -129,13 +129,13 @@ export default function Login() {
               onClick={signInFacebook}
               className="border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
             >
-              Sign in with Facebook
+              Sign in with Google
             </p>
             <p
               onClick={signInGoogle}
               className=" border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
             >
-              Sign in with Google
+              Sign in with Facebook
             </p>
           </div>
         </div>

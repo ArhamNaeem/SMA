@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./Login-page/LoginMain";
 import SignUp from "./Login-page/SignUp";
-import PostMain from "./Posts/PostMain";
+import Create from "./Posts/Create";
+import Delete from "./Posts/Delete";
 import TimelineMain from "./Timeline-page/TimelineMain";
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/timeline" element={<TimelineMain />} />
-          <Route path="/createPost" element={<PostMain />} />
+          <Route path="/create-post" element={<Create />} />
+          <Route path="/delete-post" element={ <Delete/>} />
         </Routes>
       </Router>
     </>
