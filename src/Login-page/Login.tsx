@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth, googleProvider, facebookProvider } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link , useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 export default function Login() {
   const navigate = useNavigate();
@@ -24,6 +24,7 @@ export default function Login() {
    
     }
     catch (e) {
+      console.log(e)
          setStyle(
            "w-screen h-12 bg-blue-200 text-xl text-center text-white p-2 font-md"
          );
@@ -126,13 +127,13 @@ export default function Login() {
               Sign In
             </button>
             <p
-              onClick={signInFacebook}
+              onClick={signInGoogle}
               className="border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
             >
               Sign in with Google
             </p>
             <p
-              onClick={signInGoogle}
+              onClick={signInFacebook}
               className=" border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
             >
               Sign in with Facebook
