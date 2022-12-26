@@ -1,8 +1,17 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { auth } from "../config/firebase";
+
 export default function Navbar() {
+  const currUser = auth.currentUser;
+
+    
+
   return (
     <>
+        {
+        console.log(currUser?.displayName, currUser?.email)
+      }
       <div className="h-20 bg-black opacity-80 text-white">
         <ul className="flex justify-between  p-2 items-center">
           <li>
