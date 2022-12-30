@@ -39,7 +39,8 @@ export default function Create() {
     if (!imageUpload) {
        setStyle(
          "w-screen h-12 bg-blue-300 text-xl text-center text-white p-2 font-md"
-       );
+      );
+        window.scrollTo(0, 0);
        setMsg("Incomplete info");
        setTimeout(() => {
          setStyle("w-screen h-12");
@@ -50,9 +51,11 @@ export default function Create() {
         const rand = crypto.randomUUID();
         const imgUrl = "post/" + imageUpload.name + rand;
         const imgRef = ref(storage, imgUrl);
-        setStyle(
-          "w-screen h-12 bg-blue-300 text-xl text-center text-white p-2 font-md"
-        );
+    setStyle(
+      "w-screen h-12 bg-blue-300 text-xl text-center text-white p-2 font-md scroll-smooth"
+    );
+          window.scrollTo(0, 0);
+    
         setMsg("Posting..");
      
     await uploadBytes(imgRef, imageUpload);
