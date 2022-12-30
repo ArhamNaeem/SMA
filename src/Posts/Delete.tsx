@@ -1,22 +1,32 @@
+
 import React, { useState } from "react";
-import { auth, db } from "../config/firebase";
-import { getDocs, query, where, collection } from "firebase/firestore";
+import { storage } from "../config/firebase";
+import { auth } from "../config/firebase";
+import { db } from "../config/firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { getDownloadURL, ref } from "firebase/storage";
 export default function Delete() {
   const currUser = auth.currentUser;
-  const [id, setID] = useState<any>("");
-  const postRef = collection(db, "posts");
-    const getPosts = query(postRef, where("userId", "==", currUser?.uid));
-  const getInfo = async () => {
-    // if (currUser) {
-    const posts = await getDocs(getPosts);
+  const [imgList,setImgList]=useState<string[]>([])
+  const colRef = collection(db, "posts")
+  const func = async () => {
+    const data = await getDocs(colRef);
+    data.docs.map((doc) => {
+      // console.log(currUser?.uid,doc.id);
 
-    setID(posts.docs.map((doc)=>({userId: doc.data().userId , description: doc.data().description})))
+      // if (currUser?.uid == doc.id)
+      const imgRef = ref(storage, doc.data().url);
+      getDownloadURL(imgRef).then((url) => {
+        setImgList((prev)=>[...prev,url])
+      })
+    })
+  }
 
-    // }
-  };
-  return <>
-    <button onClick={getInfo}>Click me</button>
-    {console.log(id)}
-  
-  </>;
+  return (
+    <>
+    
+   <button onClick={func}> Click</button>
+      {imgList.map((img,index) => <img src={img} key = {index} />)}  
+    </>
+  );
 }

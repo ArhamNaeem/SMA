@@ -4,9 +4,6 @@ import { auth } from "../config/firebase";
 
 export default function Navbar() {
   const currUser = auth.currentUser;
-
-    
-
   return (
     <>
         {
