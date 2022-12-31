@@ -7,39 +7,45 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { getDownloadURL, ref } from "firebase/storage";
 export default function Delete() {
   const currUser = auth.currentUser;
-  const [postData, setPostData] = useState<
-    Array<{ url: string; description: string }>
-  >([]);
+  const [postData, setPostData] = useState<string[]>([]);
   
   const colRef = collection(db, "posts");
   const func = async () => {
-  try {
-    const data = await getDocs(colRef);
-    data.docs.map((doc) => {
-      // console.log(currUser?.uid,doc.data().userId)
-      // if (currUser?.uid == doc.data().userId) {
-      const imgRef = ref(storage, doc.data().url);
-      const description = doc.data().description;
-      getDownloadURL(imgRef).then((url) => {
-        setPostData([...postData, { url: url, description: description }]);
+    try {
+      const data = await getDocs(colRef);
+      data.docs.map((doc) => {
+        // console.log(currUser?.uid,doc.data().userId)
+        // if (currUser?.uid == doc.data().userId) {
+        const imgRef = ref(storage, doc.data().url);
+        const description = doc.data().description;
+        getDownloadURL(imgRef).then((url) => {
+          console.log(url,description);
+          {
+   
+          }
+        }).catch((e) => {
+          console.log('Error', e.message, 'has occurred ')
+        });
+        // }
       });
-      // }
-    });
-  } catch (err) {
-    console.log("Error has occurred");
-  }
-  console.log("function");
+    } catch (e) {
+      console.log("Error has occurred");
+    }
   }
   useEffect(() => {
     func()
   }, []);
  
+ 
   return (
     <>
-     {
-        <div id = "main" className="p-2 h-screen flex flex-wrap justify-center">
-          {postData.map((data, index) => (
-            <p>{data.description}</p>
+  
+
+      {
+        
+        // <div id="main" className="p-2 h-screen flex flex-wrap justify-center">
+        //   {postData.map((data, index) => (
+        //     // <p>{data.description}</p>
         //     <React.Fragment key={index}>
         //       <div className=" flex text-blue-300  text-center flex-col flex-wrap justify-start items-center  w-2/3 md:w-1/3  h-3/5 p-2 m-2 border border-black lg:text-4xl ">
         //         <div className="w-full h-9/10">
@@ -59,9 +65,8 @@ export default function Delete() {
         //         </div>
         //       </div>
         //     </React.Fragment>
-            )
-          )}
-        </div>
+        //   ))}
+        // </div>
       }
     </>
   );
