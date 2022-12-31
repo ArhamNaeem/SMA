@@ -88,7 +88,7 @@ export default function Login() {
     <>
       <div className={style}>{msg}</div>
 
-      <div className="container  h-screen flex justify-between items-center text-blue-300 drop-shadow-sm">
+      <div className="container  h-screen flex justify-between items-center text-blue-400 drop-shadow-sm">
         <div className="text-center p-10 h-3/4 w-1/2 mr-4 font-bold text-5xl">
           Posts
           <p className=" border-b border-blue-300 pb-5 mt-10 font-light text-lg">
@@ -128,13 +128,13 @@ export default function Login() {
             </button>
             <p
               onClick={signInGoogle}
-              className="border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
+              className="border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all  hover:text-blue-500"
             >
               Sign in with Google
             </p>
             <p
               onClick={signInFacebook}
-              className=" border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all hover:text-blue-500"
+              className=" border-t cursor-pointer p-2 text-lg mt-4 w-full text-center transition-all  hover:text-blue-500"
             >
               Sign in with Facebook
             </p>
