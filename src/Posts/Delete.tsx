@@ -2,23 +2,26 @@ import React, { useEffect, useState } from "react";
 import { storage } from "../config/firebase";
 import { auth } from "../config/firebase";
 import { db } from "../config/firebase";
-import { collection, getDocs, deleteDoc,query,where, getDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc,query,where, getDoc, doc } from "firebase/firestore";
 import { getDownloadURL, ref } from "firebase/storage";
 export default function Delete() {
   const currUser = auth.currentUser;
   const colRef = collection(db, "posts");
   const [postData, setPostData] = useState<
-    Array<{ url: string; description: string }>
+    Array<{ url: string; description: string, postId:string }>
   >([]);
 
-  const deletePost = (url:string) => {
-    console.log(url);
-    
-    
+  const deletePost = async (postId: string) => {
+    try {
+   await deleteDoc(doc(db,'posts',postId))
+      console.log('deleted')
+    } catch (err) {
+      console.log('here');
+    }
  }
 
   const func = async () => {
-    // setIsLoading(true);
+    // setIsLoading(true);1
     try {
       const data = await getDocs(colRef);
       const posts = [];
@@ -27,10 +30,10 @@ export default function Delete() {
         if (currUser?.uid == doc.data().userId) {
         const imgRef = ref(storage, doc.data().url);
           const description = doc.data().description;
-          console.log(doc.data())
+          const postId = doc.data().postId;
         try {
           const url = await getDownloadURL(imgRef);
-          posts.push({ url: url, description: description });
+          posts.push({ url: url, description: description, postId: postId });
         } catch (e) {
           console.log("Error has occurred ");
         }
@@ -68,7 +71,7 @@ export default function Delete() {
                   </p>
                 </div>
               </div>
-              <button className="mt-8" onClick={() => { deletePost(data.url) }}>Delete Post</button>
+              <button className="mt-8" onClick={() => { deletePost(data.postId) }}>Delete Post</button>
             </div>
           </div>
         </React.Fragment>
