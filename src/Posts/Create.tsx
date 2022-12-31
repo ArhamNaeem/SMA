@@ -64,7 +64,8 @@ export default function Create() {
       username: currUser?.displayName,
       url: imgUrl,
       description: description,
-      email: currUser?.email
+      email: currUser?.email,
+      postId: crypto.randomUUID()
     })
   
       setStyle(
