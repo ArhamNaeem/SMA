@@ -2,14 +2,22 @@ import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'fireb
 import React, { useEffect, useState } from 'react'
 import { auth, db } from '../config/firebase';
 
-//create interface
-export default function PostStructure(props: any) {
+interface PostType{
+  index: number;
+  description: string;
+  postId: string;
+  url: string;
+  userName: string;
+}
+export default function PostStructure(props: PostType) {
   interface Like{
     userId: string; 
     likeId: string;
     }
   const likesRef = collection(db, "likes");
-    const likesDoc = query(likesRef, where("postId", "==", props.postId));
+  const likesDoc = query(likesRef, where("postId", "==", props.postId));
+
+  
   
   const [likes, setLikes] = useState<null | Like[]>(null);
   // check if current logged in user has liked the post
@@ -61,6 +69,7 @@ export default function PostStructure(props: any) {
     }, []);
     
   return (
+    
     <React.Fragment key={props.index}>
       <div className="w-full flex justify-center">
         <div className="flex text-blue-300 text-center flex-col flex-wrap justify-start items-center  w-2/3 md:w-1/3 h-9/10 p-3 border border-black lg:text-4xl ">

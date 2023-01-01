@@ -1,9 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from "../config/firebase";
-
+import { getAuth, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 export default function Navbar() {
+  const auth = getAuth();
+  const navigate = useNavigate();
   const currUser = auth.currentUser;
+  const signUserOut = async () => {
+    try {
+      await signOut(auth)
+      navigate("/")
+    } catch (e) {
+      console.log('error')
+    }
+  }
   return (
     <>
         {
@@ -25,7 +36,7 @@ export default function Navbar() {
             <img className=" mb-2 -ml-2 mr-2 w-14 inline" src="./images.png" />
           </li>
           <li>
-            <button className="text-xl mb-3 mr-4 lg:mr-10">Sign out</button>
+            <button className="text-xl mb-3 mr-4 lg:mr-10" onClick={signUserOut}>Sign out</button>
           </li>
         </ul>
       </div>

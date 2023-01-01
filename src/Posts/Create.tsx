@@ -82,7 +82,7 @@ export default function Create() {
     <>
       <div className={style}>{msg}</div>
       <div
-        className="flex flex-col justify-center items-center h-screen text-center text-blue-300 
+        className="flex flex-col justify-center items-center h-screen text-center text-blue-400 
        lg:text-4xl p-5"
       >
         <div className=" w-full lg:w-2/5 h-4/5 lg:h-full p-2 border border-black  ">
@@ -114,7 +114,7 @@ export default function Create() {
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}
-                  className="m-2 ml-0 p-2 h-full outline-none w-full text-sm md:text-lg resize-none"
+                  className="m-2 ml-0 p-2 h-full outline-none w-full shadow-md text-sm md:text-lg resize-none bg-transparent"
                   placeholder="Description.."
                 ></textarea>
               </div>
