@@ -13,8 +13,11 @@ export default function Delete() {
 
   const deletePost = async (postId: string) => {
     try {
-   await deleteDoc(doc(db,'posts',postId))
-      console.log('deleted')
+      const docToDeleteQuery = query(colRef, where("postId", "==", postId), where("userId", "==", currUser?.uid))
+     const docToDeleteDoc = await getDocs(docToDeleteQuery)
+      const docToDelete = doc(db, 'posts', docToDeleteDoc.docs[0].id);
+      await deleteDoc(docToDelete)
+      func();
     } catch (err) {
       console.log('here');
     }
