@@ -1,11 +1,12 @@
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { auth, db } from '../config/firebase';
 
 //create interface
 export default function PostStructure(props: any) {
   interface Like{
-    userId: string;
+    userId: string; 
+    likeId: string;
     }
   const likesRef = collection(db, "likes");
     const likesDoc = query(likesRef, where("postId", "==", props.postId));
@@ -14,25 +15,39 @@ export default function PostStructure(props: any) {
   // check if current logged in user has liked the post
 
       const currUser = auth.currentUser;
-      const addLike = async (postId: string) => {
-        await addDoc(likesRef, {
-          postId: postId,
-          userId: currUser?.uid,
-        });
-    };
+    
     
   const getLikes = async () => {
     const data = await getDocs(likesDoc);
-    setLikes(data.docs.map((doc) => ({ userId: doc.data().userId })));
+    setLikes(data.docs.map((doc) => ({ userId: doc.data().userId , likeId:doc.id})));
   };
-  const addLikes = async () => {
+  const addLike = async () => {
     try {
-      await addDoc(likesRef, {
+      const newDoc = await addDoc(likesRef, {
         userId: currUser?.uid,
         postId: props.postId
       })
       if (currUser) {
-        setLikes((prev) => prev ? [...prev, { userId: currUser.uid }] : [{ userId: currUser.uid }])
+        setLikes((prev) => prev ? [...prev, { userId: currUser.uid, likeId: newDoc.id }] : [{
+          userId: currUser.uid,
+          likeId: newDoc.id
+        }]);
+      }
+    } catch (e) {
+      console.log('Error occurred')
+    }
+  }
+  const deleteLike = async () => {
+    try {
+      const deleteLikeQuery = query(likesRef, where("postId", '==', props.postId), where("userId", "==", currUser?.uid))
+      const getLikeDoc = await getDocs(deleteLikeQuery)
+      const likeId = getLikeDoc.docs[0].id;
+      const deleteLikeDoc = doc(db, 'likes', likeId)
+      await deleteDoc(deleteLikeDoc)
+      if (currUser) {
+        setLikes(
+          (prev) => prev && prev.filter((like)=>like.likeId!==likeId)
+        )
       }
     } catch (e) {
       console.log('Error occurred')
@@ -72,7 +87,7 @@ export default function PostStructure(props: any) {
             <div className="mt-4 text-md  h-1/5 w-2/4">
               <button
                 className="absolute left-[31%] md:left-[38.3%] lg:left-[37%]  transition-all hover:scale-110"
-                onClick={addLikes}
+                onClick={hasUserLiked?deleteLike : addLike}
               >
                 {(hasUserLiked) ? <>&#10084;</>:<>&#129293;</> }
               </button>
